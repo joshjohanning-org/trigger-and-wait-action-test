@@ -18,7 +18,7 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-      - uses: joshjohanning/trigger-workflow-and-wait@main
+      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
         with:
           owner: ${{ github.repository_owner }}
           repo: long-running-action
@@ -31,7 +31,7 @@ jobs:
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
-      - uses: joshjohanning/trigger-workflow-and-wait@main
+      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
         with:
           owner: ${{ github.repository_owner }}
           repo: long-running-action
