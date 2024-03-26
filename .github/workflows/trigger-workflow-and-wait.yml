@@ -39,6 +39,7 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - run: echo "${{ toJson(matrix.data.client_payload) }}"
+        continue-on-error: true
       - uses: joshjohanning/trigger-workflow-and-wait-composite@main
         with:
           owner: ${{ github.repository_owner }}
