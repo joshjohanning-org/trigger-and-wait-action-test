@@ -1,0 +1,30 @@
+[
+    {
+        "repo": "long-running-action",
+        "workflow": "10min.yml",
+        "client_payload": {
+            "color": "blue",
+            "number": "4"
+        },
+        "ref": "main"
+    },
+    {
+        "repo": "long-running-action",
+        "workflow": "1min.yml",
+        "client_payload": {
+            "color": "orange",
+            "number": "7"
+        },
+        "ref": "main"
+    },
+    {
+        "repo": "long-running-action",
+        "workflow": "variable-minute-job.yml",
+        "client_payload": {
+            "color": "yellow",
+            "number": "2",
+            "minutes": "5"
+        },
+        "ref": "main"
+    }
+]

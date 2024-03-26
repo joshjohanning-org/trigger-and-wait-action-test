@@ -8,8 +8,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      data: ${{ steps.json.outputs.data }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build matrix
+        uses: actions/github-script@v6
+        id: json
+        with:
+          script: |
+            const fs = require('fs');
+            let data = fs.readFileSync('input.json', 'utf8');
+            core.setOutput('data', data);
   build:
     runs-on: ubuntu-latest
+    needs: prepare
+    strategy:
+      matrix: 
+        data: ${{ fromJson(needs.prepare.outputs.data) }}
+      fail-fast: false
+      max-parallel: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/create-github-app-token@v1
@@ -21,39 +41,13 @@ jobs:
       - uses: joshjohanning/trigger-workflow-and-wait-composite@main
         with:
           owner: ${{ github.repository_owner }}
-          repo: long-running-action
+          repo: ${{ matrix.data.repo }}
           github_token: ${{ steps.app-token.outputs.token }}
           github_user: ${{ github.actor }}
-          workflow_file_name: variable-minute-job.yml
-          ref: main
+          workflow_file_name: ${{ matrix.data.workflow }}
+          ref: ${{ matrix.data.ref }}
           wait_interval: 10
-          client_payload: '{ "color": "blue", "number": "5", "minutes": "600" }'
-          propagate_failure: false
-          trigger_workflow: true
-          wait_workflow: true
-      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: long-running-action
-          github_token: ${{ steps.app-token.outputs.token }}
-          github_user: ${{ github.actor }}
-          workflow_file_name: 1min.yml
-          ref: main
-          wait_interval: 10
-          client_payload: '{ "color": "blue", "number": "5" }'          
-          propagate_failure: false
-          trigger_workflow: true
-          wait_workflow: true
-      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
-        with:
-          owner: ${{ github.repository_owner }}
-          repo: long-running-action
-          github_token: ${{ steps.app-token.outputs.token }}
-          github_user: ${{ github.actor }}
-          workflow_file_name: 10min.yml
-          ref: main
-          wait_interval: 10
-          client_payload: '{ "color": "blue", "number": "5" }'
+          client_payload: '${{ matrix.data.client_payload }}'
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
