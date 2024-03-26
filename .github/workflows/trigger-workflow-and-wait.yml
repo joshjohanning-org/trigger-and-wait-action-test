@@ -23,7 +23,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: long-running-action
           github_token: ${{ steps.app-token.outputs.token }}
-          github_user: doesntmatter
+          github_user: ${{ github.actor }}
           workflow_file_name: 1min.yml
           ref: main
           wait_interval: 10
@@ -36,7 +36,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: long-running-action
           github_token: ${{ steps.app-token.outputs.token }}
-          github_user: doesntmatter
+          github_user: ${{ github.actor }}
           workflow_file_name: 10min.yml
           ref: main
           wait_interval: 10
