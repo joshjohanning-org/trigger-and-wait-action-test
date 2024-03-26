@@ -24,6 +24,19 @@ jobs:
           repo: long-running-action
           github_token: ${{ steps.app-token.outputs.token }}
           github_user: ${{ github.actor }}
+          workflow_file_name: variable-minute-job.yml
+          ref: main
+          wait_interval: 10
+          client_payload: '{ "color": "blue", "number": "5", "minutes": "600" }'
+          propagate_failure: false
+          trigger_workflow: true
+          wait_workflow: true
+      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: long-running-action
+          github_token: ${{ steps.app-token.outputs.token }}
+          github_user: ${{ github.actor }}
           workflow_file_name: 1min.yml
           ref: main
           wait_interval: 10
