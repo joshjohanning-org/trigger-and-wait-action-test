@@ -16,5 +16,15 @@
             "number": "7"
         },
         "ref": "main"
+    },
+    {
+        "repo": "long-running-action",
+        "workflow": "variable-minute-job.yml",
+        "client_payload": {
+            "color": "yellow",
+            "number": "2",
+            "minutes": "5"
+        },
+        "ref": "main"
     }
 ]
