@@ -49,7 +49,7 @@ jobs:
           workflow_file_name: ${{ matrix.data.workflow }}
           ref: ${{ matrix.data.ref }}
           wait_interval: 10
-          client_payload: '${{ fromJson(matrix.data.client_payload) }}'
+          client_payload: '${{ toJson(matrix.data.client_payload) }}'
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
