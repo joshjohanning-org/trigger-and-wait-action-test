@@ -27,7 +27,8 @@ jobs:
           workflow_file_name: 1min.yml
           ref: main
           wait_interval: 10
-          client_payload: '{ "color": "blue", "number": "5" }'          propagate_failure: false
+          client_payload: '{ "color": "blue", "number": "5" }'          
+          propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
       - uses: joshjohanning/trigger-workflow-and-wait@main
@@ -39,6 +40,7 @@ jobs:
           workflow_file_name: 10min.yml
           ref: main
           wait_interval: 10
-          client_payload: '{ "color": "blue", "number": "5" }'          propagate_failure: false
+          client_payload: '{ "color": "blue", "number": "5" }'
+          propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
