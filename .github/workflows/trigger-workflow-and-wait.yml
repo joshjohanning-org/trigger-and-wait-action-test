@@ -38,7 +38,7 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-      - run: echo "${{ fromJson(matrix.data.client_payload) }}"
+      - run: echo "${{ toJson(matrix.data.client_payload) }}"
       - uses: joshjohanning/trigger-workflow-and-wait-composite@main
         with:
           owner: ${{ github.repository_owner }}
