@@ -23,7 +23,7 @@
         "client_payload": {
             "color": "yellow",
             "number": "2",
-            "minutes": "5"
+            "minutes": "65"
         },
         "ref": "main"
     }
