@@ -40,11 +40,11 @@ jobs:
           owner: ${{ github.repository_owner }}
       - run: echo "${{ toJson(matrix.data.client_payload) }}"
         continue-on-error: true
-      - uses: joshjohanning/trigger-workflow-and-wait-composite@main
+      - uses: joshjohanning/trigger-workflow-and-wait-composite@github-app-auth
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ matrix.data.repo }}
-          github_token: ${{ steps.app-token.outputs.token }}
+          # github_token: ${{ steps.app-token.outputs.token }}
           github_user: ${{ github.actor }}
           workflow_file_name: ${{ matrix.data.workflow }}
           ref: ${{ matrix.data.ref }}
@@ -53,3 +53,6 @@ jobs:
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
+          github_app_id: ${{ vars.APP_ID }}
+          github_app_installation_id: ${{ vars.APP_INSTALLATION_ID }}
+          github_app_private_key: ${{ secrets.PRIVATE_KEY }}
