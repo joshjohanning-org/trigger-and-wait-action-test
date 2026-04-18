@@ -35,8 +35,8 @@ jobs:
       - uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          client-id: ${{ vars.APP_CLIENT_ID }}
-          private-key: ${{ secrets.PRIVATE_KEY }}
+          client-id: ${{ vars.GITHUB_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GITHUB_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - run: echo "${{ toJson(matrix.data.client_payload) }}"
         continue-on-error: true
@@ -53,6 +53,6 @@ jobs:
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
-          github_app_id: ${{ vars.APP_CLIENT_ID }}
+          github_app_id: ${{ vars.GITHUB_APP_CLIENT_ID }}
           github_app_installation_id: ${{ vars.APP_INSTALLATION_ID }}
-          github_app_private_key: ${{ secrets.PRIVATE_KEY }}
+          github_app_private_key: ${{ secrets.GITHUB_APP_PRIVATE_KEY }}
