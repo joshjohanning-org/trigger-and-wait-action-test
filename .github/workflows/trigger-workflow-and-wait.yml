@@ -32,10 +32,10 @@ jobs:
       max-parallel: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          app-id: ${{ vars.APP_ID }}
+          client-id: ${{ vars.APP_CLIENT_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
       - run: echo "${{ toJson(matrix.data.client_payload) }}"
@@ -53,6 +53,6 @@ jobs:
           propagate_failure: false
           trigger_workflow: true
           wait_workflow: true
-          github_app_id: ${{ vars.APP_ID }}
+          github_app_id: ${{ vars.APP_CLIENT_ID }}
           github_app_installation_id: ${{ vars.APP_INSTALLATION_ID }}
           github_app_private_key: ${{ secrets.PRIVATE_KEY }}
